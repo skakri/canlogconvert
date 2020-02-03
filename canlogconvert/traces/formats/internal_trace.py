@@ -76,6 +76,10 @@ class InternalMessage(object):
         return " ".join(["{:02X}".format(x) for x in self._data])
 
     @property
+    def data_as_canutils_log_string(self):
+        return "".join(["{:02X}".format(x) for x in self._data])
+
+    @property
     def dlc(self):
         """int: the length of the CAN message"""
         return self._dlc
@@ -212,6 +216,17 @@ class InternalTrace(object):
         """
         env = Environment(loader=PackageLoader("canlogconvert", "templates"))
         template = env.get_template("asc.j2")
+
+        return template.render(messages=self._messages)
+
+    def as_canutils_log_string(self):
+        """Convert to an can-utils log file
+
+        Returns:
+            str: a string representing can-utils logfile
+        """
+        env = Environment(loader=PackageLoader("canlogconvert", "templates"))
+        template = env.get_template("canutils_log.j2")
 
         return template.render(messages=self._messages)
 

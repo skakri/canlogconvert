@@ -1,0 +1,3 @@
+{%- for message in messages -%}
+({{ "%.6f" | format(message.timestamp|float / 1000) }}) vcan0 {{ "%s" | format('{:08X}'.format(message.arbitration_id)) }}#{{ message.data_as_canutils_log_string }}
+{% endfor %}

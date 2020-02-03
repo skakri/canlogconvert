@@ -78,9 +78,9 @@ StartTimeLineComment = (
     + pp.Combine(
         pp.Combine(
             pp.Word(pp.nums)
-            + pp.Literal("-")
+            + pp.Or(pp.Literal("-") ^ pp.Literal("."))
             + pp.Word(pp.nums)
-            + pp.Literal("-")
+            + pp.Or(pp.Literal("-") ^ pp.Literal("."))
             + pp.Word(pp.nums)
         )
         + pp.Combine(
@@ -374,6 +374,5 @@ def load_string(string):
 
     messages = _load_rows(tokens)
     start_time = _load_start_time_comment(tokens)
-    #  print(tokens.get("StartTimeLineComment"))
 
     return InternalTrace(messages=messages, start_timestamp=start_time)

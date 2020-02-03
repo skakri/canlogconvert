@@ -28,7 +28,10 @@ def _do_convert(args):
             raise Error("Unsupported input file extension '{}'".format(file_extension))
 
         # Then write the Internal Representation to the output format
-        print(internal_trace.as_trc_string())
+        # print(internal_trace.as_trc_string())
+        # print(internal_trace.as_asc_string())
+        # print(internal_trace.as_log_string())
+        print(internal_trace.as_canutils_log_string())
     return
 
 
